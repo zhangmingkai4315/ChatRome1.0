@@ -19,8 +19,8 @@
 		<div class="panel-heading room-header">Welcome to ChatRoom</div>
 		<div class="panel-body room-content">
 			<div class="list-group messages" auto-scroll-to-bottom>
-				<div class="list-group-item message" ng-repeate="message in messages">
-				somebody:{{message}}
+				<div class="list-group-item message" ng-repeat="message in messages">
+				    somebody:{{message}}
 				</div>
 			</div>
 			<form class="message-creator" ng-controller="MessageCreatorCtrl">

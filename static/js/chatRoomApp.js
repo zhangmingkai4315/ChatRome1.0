@@ -1,8 +1,8 @@
 angular.module('chatRoomApp', []);
 
 angular.module('chatRoomApp').factory('socket', function($rootScope){
-	return {
-		var socket=io();
+		var socket=io.connect('');
+		return {
 		on:function(eventName,callBack){
 			socket.on(eventName,function(){
 				var args=arguments;
@@ -28,12 +28,15 @@ angular.module('chatRoomApp').factory('socket', function($rootScope){
 
 angular.module('chatRoomApp').controller('RoomCtrl',function($scope,socket){
 	$scope.messages=[];
+
 	socket.emit('getAllMessages');
 	socket.on('allMessages',function(messages){
+		//alert(messages);
 		$scope.messages=messages;
 	});
 
 	socket.on('messageAdded',function(message){
+
 		$scope.messages.push(message);
 	});
 	
@@ -44,10 +47,12 @@ angular.module('chatRoomApp').controller('MessageCreatorCtrl',function($scope,so
 	$scope.newMessage="";
 	$scope.createMessage=function(){
 		if($scope.newMessage=="")
-			return;
+			return; 
+	    socket.emit('createMessage',$scope.newMessage);
+	    $scope.newMessage="";
 	}
-	socket.emit('createMessage',$scope.newMessage);
-	$scope.newMessage="";
+   
+	
 });
 angular.module('chatRoomApp').directive('autoScrollToBotton',function(){
 	return{
@@ -72,12 +77,14 @@ angular.module('chatRoomApp').directive('ctrlEnterBreakLine',function(){
 		var ctrlDown=false;
 		element.bind("keydown",function(evt){
 			if(evt.which===17){
+				alert("17");
 				ctrlDown=true;
 				setTimeout(function(){
 					ctrlDown=false;
 				},1000);
 			}
 			if(evt.which===13){
+
 				if(ctrlDown){
 					element.val(element.val()+'\n');
 				}else{

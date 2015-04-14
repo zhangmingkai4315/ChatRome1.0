@@ -29,8 +29,10 @@ io.on('connection',function(socket){
 	});
 
 
-	socket.on("getAllMessage",function(){
-		socket.emit('allMessage',messages);
+	socket.on("getAllMessages",function(){
+		console.log("Client want get all messages");
+		
+		socket.emit('allMessages',messages);
 	});
     
 
