@@ -42,7 +42,7 @@ angular.module('chatRoomApp').controller('RoomCtrl',function($scope,socket){
 	
 });
 
-//Change commiter test!
+
 angular.module('chatRoomApp').controller('MessageCreatorCtrl',function($scope,socket){
 	$scope.newMessage="";
 	$scope.createMessage=function(){
