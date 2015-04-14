@@ -1,0 +1,1 @@
+这是一个简单的聊天室程序，使用了Angular和Socket.io技术实现的SPA.
